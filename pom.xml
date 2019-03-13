@@ -43,13 +43,8 @@
       <version>${pentaho-kettle.version}</version>
     </dependency>
     <dependency>
-      <groupId>pentaho-kettle</groupId>
-      <artifactId>kettle-engine</artifactId>
-      <version>${pentaho-kettle.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>pentaho-kettle</groupId>
-      <artifactId>kettle-ui-swt</artifactId>
+      <groupId>pentaho</groupId>
+      <artifactId>metastore</artifactId>
       <version>${pentaho-kettle.version}</version>
     </dependency>
     <dependency>
@@ -61,6 +56,11 @@
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
       <version>2.8.5</version>
+    </dependency>
+    <dependency>
+      <groupId>com.googlecode.json-simple</groupId>
+      <artifactId>json-simple</artifactId>
+      <version>1.1</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -114,14 +114,14 @@
         <version>${pentaho-kettle.version}</version>
       </dependency>
       <dependency>
-        <groupId>pentaho-kettle</groupId>
-        <artifactId>kettle-engine</artifactId>
+        <groupId>pentaho</groupId>
+        <artifactId>metastore</artifactId>
         <version>${pentaho-kettle.version}</version>
       </dependency>
       <dependency>
-        <groupId>pentaho-kettle</groupId>
-        <artifactId>kettle-ui-swt</artifactId>
-        <version>${pentaho-kettle.version}</version>
+        <groupId>com.googlecode.json-simple</groupId>
+        <artifactId>json-simple</artifactId>
+        <version>1.1</version>
       </dependency>
       <dependency>
         <groupId>org.neo4j.driver</groupId>
