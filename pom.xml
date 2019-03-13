@@ -8,7 +8,9 @@
     <version>8.1-SNAPSHOT</version>
   </parent>
 
+  <groupId>kettle-neo4j</groupId>
   <artifactId>kettle-neo4j-core</artifactId>
+  <version>1.0.0</version>
   <name>${project.artifactId}</name>
   <description>Kettle Neo4j core library</description>
   <licenses>
@@ -147,8 +149,4 @@
     </dependencies>
   </dependencyManagement>
 
-
-
-  <groupId>kettle-neo4j-core</groupId>
-  <version>1.0.0</version>
 </project>
