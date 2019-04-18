@@ -7,16 +7,16 @@ import java.util.Objects;
 public class GraphProperty {
 
   @MetaStoreAttribute
-  private String name;
+  protected String name;
 
   @MetaStoreAttribute
-  private String description;
+  protected String description;
 
   @MetaStoreAttribute
-  private GraphPropertyType type;
+  protected GraphPropertyType type;
 
   @MetaStoreAttribute
-  private boolean primary;
+  protected boolean primary;
 
   public GraphProperty() {
   }

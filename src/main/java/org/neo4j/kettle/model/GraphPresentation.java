@@ -5,10 +5,10 @@ import org.pentaho.metastore.persist.MetaStoreAttribute;
 public class GraphPresentation {
 
   @MetaStoreAttribute
-  private int x;
+  protected int x;
 
   @MetaStoreAttribute
-  private int y;
+  protected int y;
 
   public GraphPresentation() {
   }

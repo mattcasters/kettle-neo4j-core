@@ -8,19 +8,19 @@ import java.util.List;
 public class GraphNode {
 
   @MetaStoreAttribute
-  private String name;
+  protected String name;
 
   @MetaStoreAttribute
-  private String description;
+  protected String description;
 
   @MetaStoreAttribute
-  private List<String> labels;
+  protected List<String> labels;
 
   @MetaStoreAttribute
-  private List<GraphProperty> properties;
+  protected List<GraphProperty> properties;
 
   @MetaStoreAttribute
-  private GraphPresentation presentation;
+  protected GraphPresentation presentation;
 
   public GraphNode() {
     labels = new ArrayList<>();

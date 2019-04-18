@@ -21,16 +21,16 @@ import java.util.List;
   name = "Neo4j Graph Model",
   description = "Description of the nodes, relationships, indexes... of a Neo4j graph" )
 public class GraphModel {
-  private String name;
+  protected String name;
 
   @MetaStoreAttribute
-  private String description;
+  protected String description;
 
   @MetaStoreAttribute
-  private List<GraphNode> nodes;
+  protected List<GraphNode> nodes;
 
   @MetaStoreAttribute
-  private List<GraphRelationship> relationships;
+  protected List<GraphRelationship> relationships;
 
   public GraphModel() {
     nodes = new ArrayList<>();

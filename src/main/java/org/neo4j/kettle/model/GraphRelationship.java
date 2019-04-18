@@ -8,22 +8,22 @@ import java.util.List;
 public class GraphRelationship {
 
   @MetaStoreAttribute
-  private String name;
+  protected String name;
 
   @MetaStoreAttribute
-  private String description;
+  protected String description;
 
   @MetaStoreAttribute
-  private String label;
+  protected String label;
 
   @MetaStoreAttribute
-  private List<GraphProperty> properties;
+  protected List<GraphProperty> properties;
 
   @MetaStoreAttribute
-  private String nodeSource;
+  protected String nodeSource;
 
   @MetaStoreAttribute
-  private String nodeTarget;
+  protected String nodeTarget;
 
   public GraphRelationship() {
     properties = new ArrayList<>();
