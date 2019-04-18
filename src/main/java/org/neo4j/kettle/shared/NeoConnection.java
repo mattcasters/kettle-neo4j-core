@@ -6,11 +6,12 @@ import org.neo4j.driver.v1.Config;
 import org.neo4j.driver.v1.Driver;
 import org.neo4j.driver.v1.GraphDatabase;
 import org.neo4j.driver.v1.Session;
-import org.neo4j.kettle.core.data.GraphData;
 import org.pentaho.di.core.Const;
 import org.pentaho.di.core.encryption.Encr;
 import org.pentaho.di.core.logging.LogChannel;
 import org.pentaho.di.core.logging.LogChannelInterface;
+import org.pentaho.di.core.row.value.ValueMetaString;
+import org.pentaho.di.core.util.Utils;
 import org.pentaho.di.core.variables.VariableSpace;
 import org.pentaho.di.core.variables.Variables;
 import org.pentaho.metastore.persist.MetaStoreAttribute;
@@ -38,6 +39,9 @@ public class NeoConnection extends Variables {
 
   @MetaStoreAttribute
   private boolean routing;
+
+  @MetaStoreAttribute
+  private String routingVariable;
 
   @MetaStoreAttribute
   private String routingPolicy;
@@ -69,7 +73,6 @@ public class NeoConnection extends Variables {
   @MetaStoreAttribute
   private String maxTransactionRetryTime;
 
-
   public NeoConnection() {
     boltPort = "7687";
     browserPort = "7474";
@@ -87,6 +90,7 @@ public class NeoConnection extends Variables {
     this.boltPort = source.boltPort;
     this.browserPort = source.browserPort;
     this.routing = source.routing;
+    this.routingVariable = source.routingVariable;
     this.routingPolicy = source.routingPolicy;
     this.username = source.username;
     this.password = source.password;
@@ -131,35 +135,35 @@ public class NeoConnection extends Variables {
       session.close();
     } catch ( Exception e ) {
 
-      throw new Exception( "Unable to connect to database '" + name + "' : "+e.getMessage() , e );
+      throw new Exception( "Unable to connect to database '" + name + "' : " + e.getMessage(), e );
     }
   }
 
   public List<URI> getURIs() throws URISyntaxException {
-    List<URI> uris = new ArrayList<>(  );
+    List<URI> uris = new ArrayList<>();
 
-    List<String> serverStrings = new ArrayList<>(  );
+    List<String> serverStrings = new ArrayList<>();
 
     String serversString = environmentSubstitute( server );
-    if (routing) {
-      for (String serverString : serversString.split( "," ) ) {
-        serverStrings.add(serverString);
+    if ( isUsingRouting() ) {
+      for ( String serverString : serversString.split( "," ) ) {
+        serverStrings.add( serverString );
       }
     } else {
-      serverStrings.add(serversString);
+      serverStrings.add( serversString );
     }
 
-    for (String serverString : serverStrings) {
+    for ( String serverString : serverStrings ) {
       // Trim excess spaces from server name
       //
-      String url = getUrl( Const.trim(serverString) );
-      uris.add(new URI(url));
+      String url = getUrl( Const.trim( serverString ) );
+      uris.add( new URI( url ) );
     }
 
     return uris;
   }
 
-  public String getUrl(String hostname) {
+  public String getUrl( String hostname ) {
 
     /*
      * Construct the following URL:
@@ -169,7 +173,7 @@ public class NeoConnection extends Variables {
      */
     String url = "bolt";
 
-    if ( routing ) {
+    if ( isUsingRouting() ) {
       url += "+routing";
     }
 
@@ -184,7 +188,7 @@ public class NeoConnection extends Variables {
     url += ":" + environmentSubstitute( boltPort );
 
     String routingPolicyString = environmentSubstitute( routingPolicy );
-    if ( routing && StringUtils.isNotEmpty( routingPolicyString ) ) {
+    if ( isUsingRouting() && StringUtils.isNotEmpty( routingPolicyString ) ) {
       try {
         url += "?policy=" + URLEncoder.encode( routingPolicyString, "UTF-8" );
       } catch ( Exception e ) {
@@ -194,6 +198,25 @@ public class NeoConnection extends Variables {
     }
 
     return url;
+  }
+
+  /**
+   * Get a list of all URLs, not just the first in case of routing.
+   * @return
+   */
+  public String getUrl() {
+    StringBuffer urls = new StringBuffer(  );
+    try {
+      for ( URI uri : getURIs() ) {
+        if ( urls.length() > 0 ) {
+          urls.append( "," );
+        }
+        urls.append( uri.toString() );
+      }
+    } catch(Exception e) {
+      urls.append("ERROR building URLs: "+e.getMessage());
+    }
+    return urls.toString();
   }
 
   public Driver getDriver( LogChannelInterface log ) {
@@ -249,14 +272,24 @@ public class NeoConnection extends Variables {
 
       Config config = configBuilder.toConfig();
 
-      if (routing) {
-        return GraphDatabase.routingDriver(uris, AuthTokens.basic( realUsername, realPassword ), config );
+      if ( isUsingRouting() ) {
+        return GraphDatabase.routingDriver( uris, AuthTokens.basic( realUsername, realPassword ), config );
       } else {
-        return GraphDatabase.driver( uris.get(0), AuthTokens.basic( realUsername, realPassword ), config );
+        return GraphDatabase.driver( uris.get( 0 ), AuthTokens.basic( realUsername, realPassword ), config );
       }
-    } catch( URISyntaxException e) {
-      throw new RuntimeException("URI syntax problem, check your settings, hostnames especially.  For routing use comma separated server values.", e);
+    } catch ( URISyntaxException e ) {
+      throw new RuntimeException( "URI syntax problem, check your settings, hostnames especially.  For routing use comma separated server values.", e );
     }
+  }
+
+  public boolean isUsingRouting() {
+    if ( !Utils.isEmpty( routingVariable ) ) {
+      String value = environmentSubstitute( routingVariable );
+      if ( !Utils.isEmpty( value ) ) {
+        return ValueMetaString.convertStringToBoolean( value );
+      }
+    }
+    return routing;
   }
 
   /**
@@ -337,6 +370,22 @@ public class NeoConnection extends Variables {
    */
   public void setRouting( boolean routing ) {
     this.routing = routing;
+  }
+
+  /**
+   * Gets routingVariable
+   *
+   * @return value of routingVariable
+   */
+  public String getRoutingVariable() {
+    return routingVariable;
+  }
+
+  /**
+   * @param routingVariable The routingVariable to set
+   */
+  public void setRoutingVariable( String routingVariable ) {
+    this.routingVariable = routingVariable;
   }
 
   /**
