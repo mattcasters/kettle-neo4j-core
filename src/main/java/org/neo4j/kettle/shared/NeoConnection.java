@@ -6,6 +6,7 @@ import org.neo4j.driver.v1.Config;
 import org.neo4j.driver.v1.Driver;
 import org.neo4j.driver.v1.GraphDatabase;
 import org.neo4j.driver.v1.Session;
+import org.neo4j.kettle.core.data.GraphData;
 import org.pentaho.di.core.Const;
 import org.pentaho.di.core.encryption.Encr;
 import org.pentaho.di.core.logging.LogChannel;
@@ -15,7 +16,11 @@ import org.pentaho.di.core.variables.Variables;
 import org.pentaho.metastore.persist.MetaStoreAttribute;
 import org.pentaho.metastore.persist.MetaStoreElementType;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @MetaStoreElementType( name = "Neo4j Connection", description = "A shared connection to a Neo4j server" )
@@ -130,7 +135,31 @@ public class NeoConnection extends Variables {
     }
   }
 
-  public String getUrl() {
+  public List<URI> getURIs() throws URISyntaxException {
+    List<URI> uris = new ArrayList<>(  );
+
+    List<String> serverStrings = new ArrayList<>(  );
+
+    String serversString = environmentSubstitute( server );
+    if (routing) {
+      for (String serverString : serversString.split( "," ) ) {
+        serverStrings.add(serverString);
+      }
+    } else {
+      serverStrings.add(serversString);
+    }
+
+    for (String serverString : serverStrings) {
+      // Trim excess spaces from server name
+      //
+      String url = getUrl( Const.trim(serverString) );
+      uris.add(new URI(url));
+    }
+
+    return uris;
+  }
+
+  public String getUrl(String hostname) {
 
     /*
      * Construct the following URL:
@@ -148,7 +177,7 @@ public class NeoConnection extends Variables {
 
     // Hostname
     //
-    url += environmentSubstitute( server );
+    url += hostname;
 
     // Port
     //
@@ -168,56 +197,66 @@ public class NeoConnection extends Variables {
   }
 
   public Driver getDriver( LogChannelInterface log ) {
-    String url = getUrl();
-    String realUsername = environmentSubstitute( username );
-    String realPassword = Encr.decryptPasswordOptionallyEncrypted(environmentSubstitute( password ));
-    Config.ConfigBuilder configBuilder;
-    if ( usingEncryption ) {
-      configBuilder = Config.build().withEncryption();
-    } else {
-      configBuilder = Config.build().withoutEncryption();
-    }
 
-    if ( StringUtils.isNotEmpty( connectionLivenessCheckTimeout ) ) {
-      long seconds = Const.toLong( environmentSubstitute( connectionLivenessCheckTimeout ), -1L );
-      if ( seconds > 0 ) {
-        configBuilder = configBuilder.withConnectionLivenessCheckTimeout( seconds, TimeUnit.MILLISECONDS );
-      }
-    }
-    if ( StringUtils.isNotEmpty( maxConnectionLifetime ) ) {
-      long seconds = Const.toLong( environmentSubstitute( maxConnectionLifetime ), -1L );
-      if ( seconds > 0 ) {
-        configBuilder = configBuilder.withMaxConnectionLifetime( seconds, TimeUnit.MILLISECONDS );
-      }
-    }
-    if ( StringUtils.isNotEmpty( maxConnectionPoolSize ) ) {
-      int size = Const.toInt( environmentSubstitute( maxConnectionPoolSize ), -1 );
-      if ( size > 0 ) {
-        configBuilder = configBuilder.withMaxConnectionPoolSize( size );
-      }
-    }
-    if ( StringUtils.isNotEmpty( connectionAcquisitionTimeout ) ) {
-      long seconds = Const.toLong( environmentSubstitute( connectionAcquisitionTimeout ), -1L );
-      if ( seconds > 0 ) {
-        configBuilder = configBuilder.withConnectionAcquisitionTimeout( seconds, TimeUnit.MILLISECONDS );
-      }
-    }
-    if ( StringUtils.isNotEmpty( connectionTimeout ) ) {
-      long seconds = Const.toLong( environmentSubstitute( connectionTimeout ), -1L );
-      if ( seconds > 0 ) {
-        configBuilder = configBuilder.withConnectionTimeout( seconds, TimeUnit.MILLISECONDS );
-      }
-    }
-    if ( StringUtils.isNotEmpty( maxTransactionRetryTime ) ) {
-      long seconds = Const.toLong( environmentSubstitute( maxTransactionRetryTime ), -1L );
-      if ( seconds > 0 ) {
-        configBuilder = configBuilder.withMaxTransactionRetryTime( seconds, TimeUnit.MILLISECONDS );
-      }
-    }
+    try {
+      List<URI> uris = getURIs();
 
-    Config config = configBuilder.toConfig();
+      String realUsername = environmentSubstitute( username );
+      String realPassword = Encr.decryptPasswordOptionallyEncrypted( environmentSubstitute( password ) );
+      Config.ConfigBuilder configBuilder;
+      if ( usingEncryption ) {
+        configBuilder = Config.build().withEncryption();
+      } else {
+        configBuilder = Config.build().withoutEncryption();
+      }
 
-    return GraphDatabase.driver( url, AuthTokens.basic( realUsername, realPassword ), config );
+      if ( StringUtils.isNotEmpty( connectionLivenessCheckTimeout ) ) {
+        long seconds = Const.toLong( environmentSubstitute( connectionLivenessCheckTimeout ), -1L );
+        if ( seconds > 0 ) {
+          configBuilder = configBuilder.withConnectionLivenessCheckTimeout( seconds, TimeUnit.MILLISECONDS );
+        }
+      }
+      if ( StringUtils.isNotEmpty( maxConnectionLifetime ) ) {
+        long seconds = Const.toLong( environmentSubstitute( maxConnectionLifetime ), -1L );
+        if ( seconds > 0 ) {
+          configBuilder = configBuilder.withMaxConnectionLifetime( seconds, TimeUnit.MILLISECONDS );
+        }
+      }
+      if ( StringUtils.isNotEmpty( maxConnectionPoolSize ) ) {
+        int size = Const.toInt( environmentSubstitute( maxConnectionPoolSize ), -1 );
+        if ( size > 0 ) {
+          configBuilder = configBuilder.withMaxConnectionPoolSize( size );
+        }
+      }
+      if ( StringUtils.isNotEmpty( connectionAcquisitionTimeout ) ) {
+        long seconds = Const.toLong( environmentSubstitute( connectionAcquisitionTimeout ), -1L );
+        if ( seconds > 0 ) {
+          configBuilder = configBuilder.withConnectionAcquisitionTimeout( seconds, TimeUnit.MILLISECONDS );
+        }
+      }
+      if ( StringUtils.isNotEmpty( connectionTimeout ) ) {
+        long seconds = Const.toLong( environmentSubstitute( connectionTimeout ), -1L );
+        if ( seconds > 0 ) {
+          configBuilder = configBuilder.withConnectionTimeout( seconds, TimeUnit.MILLISECONDS );
+        }
+      }
+      if ( StringUtils.isNotEmpty( maxTransactionRetryTime ) ) {
+        long seconds = Const.toLong( environmentSubstitute( maxTransactionRetryTime ), -1L );
+        if ( seconds > 0 ) {
+          configBuilder = configBuilder.withMaxTransactionRetryTime( seconds, TimeUnit.MILLISECONDS );
+        }
+      }
+
+      Config config = configBuilder.toConfig();
+
+      if (routing) {
+        return GraphDatabase.routingDriver(uris, AuthTokens.basic( realUsername, realPassword ), config );
+      } else {
+        return GraphDatabase.driver( uris.get(0), AuthTokens.basic( realUsername, realPassword ), config );
+      }
+    } catch( URISyntaxException e) {
+      throw new RuntimeException("URI syntax problem, check your settings, hostnames especially.  For routing use comma separated server values.", e);
+    }
   }
 
   /**
