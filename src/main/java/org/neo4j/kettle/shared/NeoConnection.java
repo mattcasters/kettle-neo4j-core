@@ -185,7 +185,9 @@ public class NeoConnection extends Variables {
 
     // Port
     //
-    url += ":" + environmentSubstitute( boltPort );
+    if (StringUtils.isNotEmpty( boltPort ) && hostname!=null && !hostname.contains( ":") ) {
+      url += ":" + environmentSubstitute( boltPort );
+    }
 
     String routingPolicyString = environmentSubstitute( routingPolicy );
     if ( isUsingRouting() && StringUtils.isNotEmpty( routingPolicyString ) ) {
