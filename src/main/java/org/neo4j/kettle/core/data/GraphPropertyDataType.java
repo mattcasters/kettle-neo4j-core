@@ -51,11 +51,12 @@ public enum GraphPropertyDataType {
     if ( code == null ) {
       return String;
     }
-    try {
-      return GraphPropertyDataType.valueOf( code );
-    } catch ( IllegalArgumentException e ) {
-      return String;
+    for ( GraphPropertyDataType type : values() ) {
+      if ( type.name().equalsIgnoreCase( code ) ) {
+        return type;
+      }
     }
+    return String;
   }
 
   public static String[] getNames() {
@@ -144,12 +145,17 @@ public enum GraphPropertyDataType {
   public int getKettleType() throws KettleValueException {
 
     switch ( this ) {
-      case String: return ValueMetaInterface.TYPE_STRING;
-      case Boolean: return ValueMetaInterface.TYPE_BOOLEAN;
-      case Float: return ValueMetaInterface.TYPE_NUMBER;
-      case Integer: return ValueMetaInterface.TYPE_INTEGER;
+      case String:
+        return ValueMetaInterface.TYPE_STRING;
+      case Boolean:
+        return ValueMetaInterface.TYPE_BOOLEAN;
+      case Float:
+        return ValueMetaInterface.TYPE_NUMBER;
+      case Integer:
+        return ValueMetaInterface.TYPE_INTEGER;
       case Date:
-      case LocalDateTime: return ValueMetaInterface.TYPE_DATE;
+      case LocalDateTime:
+        return ValueMetaInterface.TYPE_DATE;
       case ByteArray:
         return ValueMetaInterface.TYPE_BINARY;
       case Duration:
