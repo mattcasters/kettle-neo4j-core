@@ -10,7 +10,7 @@
 
   <groupId>kettle-neo4j</groupId>
   <artifactId>kettle-neo4j-core</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <name>${project.artifactId}</name>
   <description>Kettle Neo4j core library</description>
   <licenses>

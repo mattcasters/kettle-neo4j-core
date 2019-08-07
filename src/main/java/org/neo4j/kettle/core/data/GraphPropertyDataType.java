@@ -141,6 +141,28 @@ public enum GraphPropertyDataType {
     }
   }
 
+  public int getKettleType() throws KettleValueException {
+
+    switch ( this ) {
+      case String: return ValueMetaInterface.TYPE_STRING;
+      case Boolean: return ValueMetaInterface.TYPE_BOOLEAN;
+      case Float: return ValueMetaInterface.TYPE_NUMBER;
+      case Integer: return ValueMetaInterface.TYPE_INTEGER;
+      case Date:
+      case LocalDateTime: return ValueMetaInterface.TYPE_DATE;
+      case ByteArray:
+        return ValueMetaInterface.TYPE_BINARY;
+      case Duration:
+      case DateTime:
+      case Time:
+      case Point:
+      case LocalTime:
+      default:
+        throw new KettleValueException( "Data conversion to Neo4j type '" + name() + "' is not supported yet" );
+    }
+
+  }
+
   public static final GraphPropertyDataType getTypeFromKettle( ValueMetaInterface valueMeta ) {
     switch ( valueMeta.getType() ) {
       case ValueMetaInterface.TYPE_STRING:
