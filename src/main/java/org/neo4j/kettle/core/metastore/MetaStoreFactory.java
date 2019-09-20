@@ -808,7 +808,7 @@ public class MetaStoreFactory<T> {
     // Return empty list in case the namespace doesn't exist
     //
     if (!metaStore.namespaceExists( namespace )) {
-      return new ArrayList<>();
+      return Collections.emptyList();
     }
 
     MetaStoreElementType elementTypeAnnotation = getElementTypeAnnotation();
@@ -852,7 +852,13 @@ public class MetaStoreFactory<T> {
    * @throws MetaStoreException
    */
   public List<String> getElementNames() throws MetaStoreException {
-    List<String> names = new ArrayList<String>();
+    List<String> names = new ArrayList<>();
+
+    // Return empty list in case the namespace doesn't exist
+    //
+    if (!metaStore.namespaceExists( namespace )) {
+      return names;
+    }
 
     MetaStoreElementType elementTypeAnnotation = getElementTypeAnnotation();
 
