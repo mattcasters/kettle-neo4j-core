@@ -804,6 +804,13 @@ public class MetaStoreFactory<T> {
    * @throws MetaStoreException
    */
   public List<T> getElements() throws MetaStoreException {
+
+    // Return empty list in case the namespace doesn't exist
+    //
+    if (!metaStore.namespaceExists( namespace )) {
+      return new ArrayList<>();
+    }
+
     MetaStoreElementType elementTypeAnnotation = getElementTypeAnnotation();
 
     IMetaStoreElementType elementType = metaStore.getElementTypeByName( namespace, elementTypeAnnotation.name() );
