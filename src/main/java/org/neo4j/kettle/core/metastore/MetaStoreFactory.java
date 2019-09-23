@@ -73,7 +73,7 @@ public class MetaStoreFactory<T> {
       throw new MetaStoreException( "You need to specify the name of an element to load" );
     }
 
-    if (!metaStore.namespaceExists( name )) {
+    if (!metaStore.namespaceExists( namespace )) {
       return null;
     }
 
