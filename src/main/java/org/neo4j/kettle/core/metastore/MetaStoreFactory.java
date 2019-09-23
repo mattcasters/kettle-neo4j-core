@@ -73,6 +73,10 @@ public class MetaStoreFactory<T> {
       throw new MetaStoreException( "You need to specify the name of an element to load" );
     }
 
+    if (!metaStore.namespaceExists( name )) {
+      return null;
+    }
+
     MetaStoreElementType elementTypeAnnotation = getElementTypeAnnotation();
 
     IMetaStoreElementType elementType = metaStore.getElementTypeByName( namespace, elementTypeAnnotation.name() );
