@@ -1,5 +1,6 @@
 package org.neo4j.kettle.shared;
 
+import org.apache.commons.lang.StringUtils;
 import org.neo4j.driver.Driver;
 import org.pentaho.di.core.logging.LogChannelInterface;
 
@@ -56,8 +57,15 @@ public class DriverSingleton {
     String hostname = connection.environmentSubstitute( connection.getServer() );
     String boltPort = connection.environmentSubstitute( connection.getBoltPort() );
     String username = connection.environmentSubstitute( connection.getUsername() );
-
-    return hostname+":"+boltPort+"@"+username;
+    String database = null;
+    if ( StringUtils.isNotEmpty(connection.getDatabaseName())) {
+      database = connection.environmentSubstitute( connection.getDatabaseName() );
+    }
+    if (StringUtils.isNotEmpty( database )) {
+      return hostname + ":" + boltPort + "@" + username + "/" +database;
+    } else {
+      return hostname + ":" + boltPort + "@" + username;
+    }
   }
 
   /**

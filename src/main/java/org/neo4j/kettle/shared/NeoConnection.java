@@ -5,13 +5,18 @@ import org.neo4j.driver.AuthTokens;
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
+import org.neo4j.driver.Record;
+import org.neo4j.driver.Result;
 import org.neo4j.driver.Session;
 import org.neo4j.driver.SessionConfig;
+import org.neo4j.driver.Transaction;
+import org.neo4j.driver.Value;
 import org.pentaho.di.core.Const;
 import org.pentaho.di.core.encryption.Encr;
 import org.pentaho.di.core.logging.LogChannel;
 import org.pentaho.di.core.logging.LogChannelInterface;
 import org.pentaho.di.core.row.value.ValueMetaString;
+import org.pentaho.di.core.util.StringUtil;
 import org.pentaho.di.core.util.Utils;
 import org.pentaho.di.core.variables.VariableSpace;
 import org.pentaho.di.core.variables.Variables;
@@ -132,23 +137,50 @@ public class NeoConnection extends Variables {
   }
 
   /**
+   * Get a Neo4j session to work with
+   * @param log The logchannel to log to
+   * @return The Neo4j session
+   */
+  public Session getSession(LogChannelInterface log) {
+    Driver driver = getDriver(log);
+    SessionConfig.Builder cfgBuilder = SessionConfig.builder();
+    if ( StringUtils.isNotEmpty( databaseName ) ) {
+      String realDatabaseName = environmentSubstitute( databaseName );
+      if (StringUtils.isNotEmpty( realDatabaseName )) {
+        cfgBuilder.withDatabase( realDatabaseName );
+      }
+    }
+    return driver.session( cfgBuilder.build() );
+  }
+
+  /**
    * Test this connection to Neo4j
    *
    * @throws Exception In case anything goes wrong
    */
   public void test() throws Exception {
 
+    Session session=null;
     try {
       Driver driver = getDriver( LogChannel.GENERAL );
       SessionConfig.Builder builder = SessionConfig.builder();
       if ( StringUtils.isNotEmpty( databaseName ) ) {
         builder = builder.withDatabase( environmentSubstitute( databaseName ) );
       }
-      Session session = driver.session( builder.build() );
-      session.close();
+      session = driver.session( builder.build() );
+      // Do something with the session otherwise it doesn't test the connection
+      //
+      Result result = session.run( "RETURN 0" );
+      Record record = result.next();
+      Value value = record.get( 0 );
+      int zero = value.asInt();
+      assert(zero==0);
     } catch ( Exception e ) {
-
       throw new Exception( "Unable to connect to database '" + name + "' : " + e.getMessage(), e );
+    } finally {
+      if (session!=null) {
+        session.close();
+      }
     }
   }
 
@@ -258,7 +290,6 @@ public class NeoConnection extends Variables {
       } else {
         configBuilder = Config.builder().withoutEncryption();
       }
-
       if ( StringUtils.isNotEmpty( connectionLivenessCheckTimeout ) ) {
         long seconds = Const.toLong( environmentSubstitute( connectionLivenessCheckTimeout ), -1L );
         if ( seconds > 0 ) {
