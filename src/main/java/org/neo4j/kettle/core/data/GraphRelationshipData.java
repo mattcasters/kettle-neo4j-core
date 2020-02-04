@@ -2,8 +2,8 @@ package org.neo4j.kettle.core.data;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.neo4j.driver.v1.Value;
-import org.neo4j.driver.v1.types.Relationship;
+import org.neo4j.driver.Value;
+import org.neo4j.driver.types.Relationship;
 
 import java.util.ArrayList;
 import java.util.List;

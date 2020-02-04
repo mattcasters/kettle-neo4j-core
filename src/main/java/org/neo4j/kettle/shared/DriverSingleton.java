@@ -1,6 +1,6 @@
 package org.neo4j.kettle.shared;
 
-import org.neo4j.driver.v1.Driver;
+import org.neo4j.driver.Driver;
 import org.pentaho.di.core.logging.LogChannelInterface;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public class DriverSingleton {
 
   private static DriverSingleton singleton;
 
-  private Map<String, org.neo4j.driver.v1.Driver> driverMap;
+  private Map<String, org.neo4j.driver.Driver> driverMap;
 
   private DriverSingleton() {
     driverMap = new HashMap<>(  );

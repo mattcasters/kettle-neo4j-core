@@ -1,11 +1,12 @@
 package org.neo4j.kettle.shared;
 
 import org.apache.commons.lang.StringUtils;
-import org.neo4j.driver.v1.AuthTokens;
-import org.neo4j.driver.v1.Config;
-import org.neo4j.driver.v1.Driver;
-import org.neo4j.driver.v1.GraphDatabase;
-import org.neo4j.driver.v1.Session;
+import org.neo4j.driver.AuthTokens;
+import org.neo4j.driver.Config;
+import org.neo4j.driver.Driver;
+import org.neo4j.driver.GraphDatabase;
+import org.neo4j.driver.Session;
+import org.neo4j.driver.SessionConfig;
 import org.pentaho.di.core.Const;
 import org.pentaho.di.core.encryption.Encr;
 import org.pentaho.di.core.logging.LogChannel;
@@ -32,6 +33,9 @@ public class NeoConnection extends Variables {
   private String server;
 
   @MetaStoreAttribute
+  private String databaseName;
+
+  @MetaStoreAttribute
   private String boltPort;
 
   @MetaStoreAttribute
@@ -56,6 +60,9 @@ public class NeoConnection extends Variables {
   private boolean usingEncryption;
 
   @MetaStoreAttribute
+  private List<String> manualUrls;
+
+  @MetaStoreAttribute
   private String connectionLivenessCheckTimeout;
 
   @MetaStoreAttribute
@@ -76,9 +83,11 @@ public class NeoConnection extends Variables {
   public NeoConnection() {
     boltPort = "7687";
     browserPort = "7474";
+    manualUrls = new ArrayList<>();
   }
 
   public NeoConnection( VariableSpace parent ) {
+    this();
     super.initializeVariablesFrom( parent );
     usingEncryption = true;
   }
@@ -131,7 +140,11 @@ public class NeoConnection extends Variables {
 
     try {
       Driver driver = getDriver( LogChannel.GENERAL );
-      Session session = driver.session();
+      SessionConfig.Builder builder = SessionConfig.builder();
+      if ( StringUtils.isNotEmpty( databaseName ) ) {
+        builder = builder.withDatabase( environmentSubstitute( databaseName ) );
+      }
+      Session session = driver.session( builder.build() );
       session.close();
     } catch ( Exception e ) {
 
@@ -140,24 +153,34 @@ public class NeoConnection extends Variables {
   }
 
   public List<URI> getURIs() throws URISyntaxException {
+
     List<URI> uris = new ArrayList<>();
 
-    List<String> serverStrings = new ArrayList<>();
-
-    String serversString = environmentSubstitute( server );
-    if ( isUsingRouting() ) {
-      for ( String serverString : serversString.split( "," ) ) {
-        serverStrings.add( serverString );
+    if ( manualUrls != null && !manualUrls.isEmpty() ) {
+      // A manual URL is specified
+      //
+      for ( String manualUrl : manualUrls ) {
+        uris.add( new URI( manualUrl ) );
       }
     } else {
-      serverStrings.add( serversString );
-    }
-
-    for ( String serverString : serverStrings ) {
-      // Trim excess spaces from server name
+      // Construct the URIs from the entered values
       //
-      String url = getUrl( Const.trim( serverString ) );
-      uris.add( new URI( url ) );
+      List<String> serverStrings = new ArrayList<>();
+      String serversString = environmentSubstitute( server );
+      if ( isUsingRouting() ) {
+        for ( String serverString : serversString.split( "," ) ) {
+          serverStrings.add( serverString );
+        }
+      } else {
+        serverStrings.add( serversString );
+      }
+
+      for ( String serverString : serverStrings ) {
+        // Trim excess spaces from server name
+        //
+        String url = getUrl( Const.trim( serverString ) );
+        uris.add( new URI( url ) );
+      }
     }
 
     return uris;
@@ -185,7 +208,7 @@ public class NeoConnection extends Variables {
 
     // Port
     //
-    if (StringUtils.isNotEmpty( boltPort ) && hostname!=null && !hostname.contains( ":") ) {
+    if ( StringUtils.isNotEmpty( boltPort ) && hostname != null && !hostname.contains( ":" ) ) {
       url += ":" + environmentSubstitute( boltPort );
     }
 
@@ -204,10 +227,11 @@ public class NeoConnection extends Variables {
 
   /**
    * Get a list of all URLs, not just the first in case of routing.
+   *
    * @return
    */
   public String getUrl() {
-    StringBuffer urls = new StringBuffer(  );
+    StringBuffer urls = new StringBuffer();
     try {
       for ( URI uri : getURIs() ) {
         if ( urls.length() > 0 ) {
@@ -215,8 +239,8 @@ public class NeoConnection extends Variables {
         }
         urls.append( uri.toString() );
       }
-    } catch(Exception e) {
-      urls.append("ERROR building URLs: "+e.getMessage());
+    } catch ( Exception e ) {
+      urls.append( "ERROR building URLs: " + e.getMessage() );
     }
     return urls.toString();
   }
@@ -230,9 +254,9 @@ public class NeoConnection extends Variables {
       String realPassword = Encr.decryptPasswordOptionallyEncrypted( environmentSubstitute( password ) );
       Config.ConfigBuilder configBuilder;
       if ( usingEncryption ) {
-        configBuilder = Config.build().withEncryption();
+        configBuilder = Config.builder().withEncryption();
       } else {
-        configBuilder = Config.build().withoutEncryption();
+        configBuilder = Config.builder().withoutEncryption();
       }
 
       if ( StringUtils.isNotEmpty( connectionLivenessCheckTimeout ) ) {
@@ -272,7 +296,7 @@ public class NeoConnection extends Variables {
         }
       }
 
-      Config config = configBuilder.toConfig();
+      Config config = configBuilder.build();
 
       if ( isUsingRouting() ) {
         return GraphDatabase.routingDriver( uris, AuthTokens.basic( realUsername, realPassword ), config );
@@ -324,6 +348,22 @@ public class NeoConnection extends Variables {
    */
   public void setServer( String server ) {
     this.server = server;
+  }
+
+  /**
+   * Gets databaseName
+   *
+   * @return value of databaseName
+   */
+  public String getDatabaseName() {
+    return databaseName;
+  }
+
+  /**
+   * @param databaseName The databaseName to set
+   */
+  public void setDatabaseName( String databaseName ) {
+    this.databaseName = databaseName;
   }
 
   /**
@@ -452,6 +492,22 @@ public class NeoConnection extends Variables {
    */
   public void setUsingEncryption( boolean usingEncryption ) {
     this.usingEncryption = usingEncryption;
+  }
+
+  /**
+   * Gets manualUrls
+   *
+   * @return value of manualUrls
+   */
+  public List<String> getManualUrls() {
+    return manualUrls;
+  }
+
+  /**
+   * @param manualUrls The manualUrls to set
+   */
+  public void setManualUrls( List<String> manualUrls ) {
+    this.manualUrls = manualUrls;
   }
 
   /**
