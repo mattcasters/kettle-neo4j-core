@@ -9,14 +9,12 @@ import org.neo4j.driver.Record;
 import org.neo4j.driver.Result;
 import org.neo4j.driver.Session;
 import org.neo4j.driver.SessionConfig;
-import org.neo4j.driver.Transaction;
 import org.neo4j.driver.Value;
 import org.pentaho.di.core.Const;
 import org.pentaho.di.core.encryption.Encr;
 import org.pentaho.di.core.logging.LogChannel;
 import org.pentaho.di.core.logging.LogChannelInterface;
 import org.pentaho.di.core.row.value.ValueMetaString;
-import org.pentaho.di.core.util.StringUtil;
 import org.pentaho.di.core.util.Utils;
 import org.pentaho.di.core.variables.VariableSpace;
 import org.pentaho.di.core.variables.Variables;
@@ -85,10 +83,14 @@ public class NeoConnection extends Variables {
   @MetaStoreAttribute
   private String maxTransactionRetryTime;
 
+  @MetaStoreAttribute
+  private boolean version4;
+
   public NeoConnection() {
     boltPort = "7687";
     browserPort = "7474";
     manualUrls = new ArrayList<>();
+    version4 = true;
   }
 
   public NeoConnection( VariableSpace parent ) {
@@ -109,6 +111,13 @@ public class NeoConnection extends Variables {
     this.username = source.username;
     this.password = source.password;
     this.usingEncryption = source.usingEncryption;
+    this.connectionLivenessCheckTimeout = source.connectionLivenessCheckTimeout;
+    this.maxConnectionLifetime = source.maxConnectionLifetime;
+    this.maxConnectionPoolSize = source.maxConnectionPoolSize;
+    this.connectionAcquisitionTimeout = source.connectionAcquisitionTimeout;
+    this.connectionTimeout = source.connectionTimeout;
+    this.maxTransactionRetryTime = source.maxTransactionRetryTime;
+    this.version4 = source.version4;
   }
 
   @Override
@@ -138,15 +147,16 @@ public class NeoConnection extends Variables {
 
   /**
    * Get a Neo4j session to work with
+   *
    * @param log The logchannel to log to
    * @return The Neo4j session
    */
-  public Session getSession(LogChannelInterface log) {
-    Driver driver = getDriver(log);
+  public Session getSession( LogChannelInterface log ) {
+    Driver driver = getDriver( log );
     SessionConfig.Builder cfgBuilder = SessionConfig.builder();
     if ( StringUtils.isNotEmpty( databaseName ) ) {
       String realDatabaseName = environmentSubstitute( databaseName );
-      if (StringUtils.isNotEmpty( realDatabaseName )) {
+      if ( StringUtils.isNotEmpty( realDatabaseName ) ) {
         cfgBuilder.withDatabase( realDatabaseName );
       }
     }
@@ -160,7 +170,7 @@ public class NeoConnection extends Variables {
    */
   public void test() throws Exception {
 
-    Session session=null;
+    Session session = null;
     try {
       Driver driver = getDriver( LogChannel.GENERAL );
       SessionConfig.Builder builder = SessionConfig.builder();
@@ -174,11 +184,11 @@ public class NeoConnection extends Variables {
       Record record = result.next();
       Value value = record.get( 0 );
       int zero = value.asInt();
-      assert(zero==0);
+      assert ( zero == 0 );
     } catch ( Exception e ) {
       throw new Exception( "Unable to connect to database '" + name + "' : " + e.getMessage(), e );
     } finally {
-      if (session!=null) {
+      if ( session != null ) {
         session.close();
       }
     }
@@ -226,10 +236,14 @@ public class NeoConnection extends Variables {
      * bolt://hostname:port
      * bolt+routing://core-server:port/?policy=MyPolicy
      */
-    String url = "bolt";
-
-    if ( isUsingRouting() ) {
-      url += "+routing";
+    String url = "";
+    if (isVersion4()) {
+     url+="neo4j";
+    } else {
+      url += "bolt";
+      if ( isUsingRouting() ) {
+        url += "+routing";
+      }
     }
 
     url += "://";
@@ -635,5 +649,21 @@ public class NeoConnection extends Variables {
    */
   public void setMaxTransactionRetryTime( String maxTransactionRetryTime ) {
     this.maxTransactionRetryTime = maxTransactionRetryTime;
+  }
+
+  /**
+   * Gets version4
+   *
+   * @return value of version4
+   */
+  public boolean isVersion4() {
+    return version4;
+  }
+
+  /**
+   * @param version4 The version4 to set
+   */
+  public void setVersion4( boolean version4 ) {
+    this.version4 = version4;
   }
 }
