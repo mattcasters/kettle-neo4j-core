@@ -237,15 +237,11 @@ public class NeoConnection extends Variables {
      * bolt+routing://core-server:port/?policy=MyPolicy
      */
     String url = "";
-    if (isVersion4()) {
-     url+="neo4j";
+    if ( isRouting() ) {
+      url += "neo4j";
     } else {
       url += "bolt";
-      if ( isUsingRouting() ) {
-        url += "+routing";
-      }
     }
-
     url += "://";
 
     // Hostname
