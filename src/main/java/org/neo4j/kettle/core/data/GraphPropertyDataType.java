@@ -19,7 +19,10 @@ public enum GraphPropertyDataType {
   Point( null ),
   Duration( "duration" ),
   LocalTime( "localtime" ),
-  DateTime( "datetime" );
+  DateTime( "datetime" ),
+  List("List"),
+  Map("Map"),
+  ;
 
   private String importType;
 
