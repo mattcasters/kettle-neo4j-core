@@ -1,0 +1,248 @@
+{
+  "metadata": {
+    "title": "Beers",
+    "dateCreated": "1581007604328",
+    "dateUpdated": "1586181579471",
+    "description": "Testing",
+    "notes": "",
+    "tags": [],
+    "customers": [],
+    "owners": [
+      {
+        "email": "matt.casters@neotechnology.com",
+        "__typename": "User"
+      }
+    ],
+    "viewSettings": {
+      "canvasViewSettings": {
+        "currentPan": {
+          "x": -519.9999580383301,
+          "y": -114.99998664855957
+        },
+        "currentOffset": {
+          "x": 0,
+          "y": 0
+        },
+        "scaleFactor": 1
+      }
+    }
+  },
+  "dataModel": {
+    "nodeLabels": {
+      "Node5": {
+        "classType": "NodeLabel",
+        "label": "Type",
+        "fromDataSources": [],
+        "key": "Node5",
+        "constraints": [],
+        "indexedProperties": [],
+        "properties": {
+          "Prop10": {
+            "key": "Prop10",
+            "name": "name",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": true,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": true,
+            "hasUniqueConstraint": true
+          }
+        },
+        "referenceData": {},
+        "display": {
+          "color": "#00bcd4",
+          "stroke": "#007086",
+          "strokeWidth": 4,
+          "x": 1020,
+          "y": 260,
+          "radius": 40,
+          "size": "md",
+          "width": 80,
+          "height": 80,
+          "fontSize": 14,
+          "fontColor": "white",
+          "textLocation": "middle",
+          "isLocked": false
+        }
+      },
+      "Node3": {
+        "classType": "NodeLabel",
+        "label": "Strength",
+        "fromDataSources": [],
+        "key": "Node3",
+        "constraints": [],
+        "indexedProperties": [],
+        "properties": {
+          "Prop8": {
+            "key": "Prop8",
+            "name": "pct",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": true,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": true,
+            "hasUniqueConstraint": true
+          }
+        },
+        "referenceData": {},
+        "display": {
+          "color": "#00bcd4",
+          "stroke": "#007086",
+          "strokeWidth": 4,
+          "x": 1020,
+          "y": 440,
+          "radius": 40,
+          "size": "md",
+          "width": 80,
+          "height": 80,
+          "fontSize": 14,
+          "fontColor": "white",
+          "textLocation": "middle",
+          "isLocked": false
+        }
+      },
+      "Node1": {
+        "classType": "NodeLabel",
+        "label": "Brewery",
+        "fromDataSources": [],
+        "key": "Node1",
+        "constraints": [],
+        "indexedProperties": [],
+        "properties": {
+          "Prop7": {
+            "key": "Prop7",
+            "name": "name",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": true,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": true,
+            "hasUniqueConstraint": true
+          }
+        },
+        "referenceData": {},
+        "display": {
+          "color": "#00bcd4",
+          "stroke": "#007086",
+          "strokeWidth": 4,
+          "x": 1020,
+          "y": 620,
+          "radius": 40,
+          "size": "md",
+          "width": 80,
+          "height": 80,
+          "fontSize": 14,
+          "fontColor": "white",
+          "textLocation": "middle",
+          "isLocked": false
+        }
+      },
+      "Node0": {
+        "classType": "NodeLabel",
+        "label": "Brand",
+        "fromDataSources": [],
+        "key": "Node0",
+        "constraints": [],
+        "indexedProperties": [],
+        "properties": {
+          "Prop6": {
+            "key": "Prop6",
+            "name": "name",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": true,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": true,
+            "hasUniqueConstraint": true
+          }
+        },
+        "referenceData": {},
+        "display": {
+          "color": "#2196f3",
+          "stroke": "#004fa2",
+          "strokeWidth": 4,
+          "x": 820,
+          "y": 440,
+          "radius": 60,
+          "size": "lg",
+          "width": 120,
+          "height": 120,
+          "fontSize": 14,
+          "fontColor": "white",
+          "textLocation": "middle",
+          "isLocked": true
+        }
+      }
+    },
+    "relationshipTypes": {
+      "Rel6": {
+        "classType": "RelationshipType",
+        "key": "Rel6",
+        "type": "has_type",
+        "startNodeLabelKey": "Node0",
+        "endNodeLabelKey": "Node5",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 0
+        }
+      },
+      "Rel4": {
+        "classType": "RelationshipType",
+        "key": "Rel4",
+        "type": "has_strength",
+        "startNodeLabelKey": "Node0",
+        "endNodeLabelKey": "Node3",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 0
+        }
+      },
+      "Rel2": {
+        "classType": "RelationshipType",
+        "key": "Rel2",
+        "type": "brewed_by",
+        "startNodeLabelKey": "Node0",
+        "endNodeLabelKey": "Node1",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 0
+        }
+      }
+    }
+  }
+}

@@ -75,6 +75,16 @@
           <include>**/*.properties</include>
           <include>**/*.xul</include>
           <include>**/*.svg</include>
+          <include>**/*.json</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/test/java</directory>
+        <includes>
+          <include>**/*.properties</include>
+          <include>**/*.xul</include>
+          <include>**/*.svg</include>
+          <include>**/*.json</include>
         </includes>
       </resource>
     </resources>
