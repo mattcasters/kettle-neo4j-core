@@ -1,0 +1,639 @@
+{
+  "metadata": {
+    "title": "Lego (4/20/2020, 10:25:39 AM)",
+    "description": "Imported using apoc.meta.schema from Lego Localhost (bolt://localhost:5687)",
+    "notes": "",
+    "customer": "",
+    "authors": "",
+    "tags": "",
+    "dateCreated": "1587392739828",
+    "dateUpdated": "1587392860369",
+    "viewSettings": {
+      "canvasViewSettings": {
+        "currentPan": {
+          "x": -82,
+          "y": -3
+        },
+        "currentOffset": {
+          "x": 0,
+          "y": 0
+        },
+        "scaleFactor": 1
+      }
+    }
+  },
+  "dataModel": {
+    "nodeLabels": {
+      "Node13": {
+        "classType": "NodeLabel",
+        "label": "Inventory",
+        "fromDataSources": [],
+        "key": "Node13",
+        "constraints": [],
+        "indexedProperties": [],
+        "properties": {
+          "Prop14": {
+            "key": "Prop14",
+            "name": "version",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": false,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          },
+          "Prop15": {
+            "key": "Prop15",
+            "name": "id",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": true,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": true,
+            "hasUniqueConstraint": true
+          }
+        },
+        "referenceData": {},
+        "display": {
+          "color": "white",
+          "stroke": "black",
+          "strokeWidth": 4,
+          "x": 640,
+          "y": 160,
+          "radius": 40,
+          "size": "md",
+          "width": 80,
+          "height": 80,
+          "fontSize": 14,
+          "fontColor": "black",
+          "textLocation": "middle",
+          "isLocked": false
+        },
+        "hasAnnotation": true,
+        "x": 640,
+        "y": 160
+      },
+      "Node11": {
+        "classType": "NodeLabel",
+        "label": "Theme",
+        "fromDataSources": [],
+        "key": "Node11",
+        "constraints": [],
+        "indexedProperties": [],
+        "properties": {
+          "Prop12": {
+            "key": "Prop12",
+            "name": "name",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          },
+          "Prop13": {
+            "key": "Prop13",
+            "name": "id",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": true,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": true,
+            "hasUniqueConstraint": true
+          }
+        },
+        "referenceData": {},
+        "display": {
+          "color": "white",
+          "stroke": "black",
+          "strokeWidth": 4,
+          "x": 1280,
+          "y": 280,
+          "radius": 40,
+          "size": "md",
+          "width": 80,
+          "height": 80,
+          "fontSize": 14,
+          "fontColor": "black",
+          "textLocation": "middle",
+          "isLocked": false
+        },
+        "hasAnnotation": true,
+        "x": 1280,
+        "y": 280
+      },
+      "Node9": {
+        "classType": "NodeLabel",
+        "label": "Part",
+        "fromDataSources": [],
+        "key": "Node9",
+        "constraints": [],
+        "indexedProperties": [],
+        "properties": {
+          "Prop11": {
+            "key": "Prop11",
+            "name": "part_num",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": true,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": true,
+            "hasUniqueConstraint": true
+          },
+          "Prop10": {
+            "key": "Prop10",
+            "name": "name",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          }
+        },
+        "referenceData": {},
+        "display": {
+          "color": "white",
+          "stroke": "black",
+          "strokeWidth": 4,
+          "x": 700,
+          "y": 320,
+          "radius": 40,
+          "size": "md",
+          "width": 80,
+          "height": 80,
+          "fontSize": 14,
+          "fontColor": "black",
+          "textLocation": "middle",
+          "isLocked": false
+        },
+        "hasAnnotation": true,
+        "x": 700,
+        "y": 320
+      },
+      "Node3": {
+        "classType": "NodeLabel",
+        "label": "Color",
+        "fromDataSources": [],
+        "key": "Node3",
+        "constraints": [],
+        "indexedProperties": [],
+        "properties": {
+          "Prop5": {
+            "key": "Prop5",
+            "name": "id",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": true,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": true,
+            "hasUniqueConstraint": true
+          },
+          "Prop7": {
+            "key": "Prop7",
+            "name": "is_trans",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": false,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          },
+          "Prop6": {
+            "key": "Prop6",
+            "name": "rgb",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": false,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          },
+          "Prop4": {
+            "key": "Prop4",
+            "name": "name",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          }
+        },
+        "referenceData": {},
+        "display": {
+          "color": "white",
+          "stroke": "black",
+          "strokeWidth": 4,
+          "x": 620,
+          "y": 480,
+          "radius": 40,
+          "size": "md",
+          "width": 80,
+          "height": 80,
+          "fontSize": 14,
+          "fontColor": "black",
+          "textLocation": "middle",
+          "isLocked": false
+        },
+        "hasAnnotation": true,
+        "x": 620,
+        "y": 480
+      },
+      "Node0": {
+        "classType": "NodeLabel",
+        "label": "Set",
+        "fromDataSources": [],
+        "key": "Node0",
+        "constraints": [],
+        "indexedProperties": [],
+        "properties": {
+          "Prop0": {
+            "key": "Prop0",
+            "name": "name",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          },
+          "Prop3": {
+            "key": "Prop3",
+            "name": "year",
+            "datatype": "Integer",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": false,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          },
+          "Prop1": {
+            "key": "Prop1",
+            "name": "num_parts",
+            "datatype": "Integer",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": false,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          },
+          "Prop2": {
+            "key": "Prop2",
+            "name": "set_num",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": true,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": true,
+            "hasUniqueConstraint": true
+          }
+        },
+        "referenceData": {},
+        "display": {
+          "color": "white",
+          "stroke": "black",
+          "strokeWidth": 4,
+          "x": 1020,
+          "y": 160,
+          "radius": 40,
+          "size": "md",
+          "width": 80,
+          "height": 80,
+          "fontSize": 14,
+          "fontColor": "black",
+          "textLocation": "middle",
+          "isLocked": false
+        },
+        "hasAnnotation": true,
+        "x": 1020,
+        "y": 160
+      },
+      "Node7": {
+        "classType": "NodeLabel",
+        "label": "PartCategory",
+        "fromDataSources": [],
+        "key": "Node7",
+        "constraints": [],
+        "indexedProperties": [],
+        "properties": {
+          "Prop9": {
+            "key": "Prop9",
+            "name": "id",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": true,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": true,
+            "hasUniqueConstraint": true
+          },
+          "Prop8": {
+            "key": "Prop8",
+            "name": "name",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": false,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          }
+        },
+        "referenceData": {},
+        "display": {
+          "color": "white",
+          "stroke": "black",
+          "strokeWidth": 4,
+          "x": 960,
+          "y": 320,
+          "radius": 40,
+          "size": "md",
+          "width": 80,
+          "height": 80,
+          "fontSize": 14,
+          "fontColor": "black",
+          "textLocation": "middle",
+          "isLocked": false
+        },
+        "hasAnnotation": true,
+        "x": 960,
+        "y": 320
+      },
+      "Node15": {
+        "classType": "NodeLabel",
+        "label": "InventoryPart",
+        "fromDataSources": [],
+        "key": "Node15",
+        "constraints": [],
+        "indexedProperties": [],
+        "properties": {
+          "Prop18": {
+            "key": "Prop18",
+            "name": "color_id",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          },
+          "Prop19": {
+            "key": "Prop19",
+            "name": "inventory_id",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          },
+          "Prop16": {
+            "key": "Prop16",
+            "name": "part_num",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          },
+          "Prop20": {
+            "key": "Prop20",
+            "name": "is_spare",
+            "datatype": "Boolean",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          },
+          "Prop17": {
+            "key": "Prop17",
+            "name": "quantity",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": false,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          }
+        },
+        "referenceData": {},
+        "display": {
+          "color": "white",
+          "stroke": "black",
+          "strokeWidth": 4,
+          "x": 400,
+          "y": 320,
+          "radius": 40,
+          "size": "md",
+          "width": 80,
+          "height": 80,
+          "fontSize": 14,
+          "fontColor": "black",
+          "textLocation": "middle",
+          "isLocked": false
+        },
+        "hasAnnotation": true,
+        "x": 400,
+        "y": 320
+      }
+    },
+    "relationshipTypes": {
+      "Rel21": {
+        "classType": "RelationshipType",
+        "key": "Rel21",
+        "type": "HAS_PART_CATEGORY",
+        "startNodeLabelKey": "Node9",
+        "endNodeLabelKey": "Node7",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 0
+        }
+      },
+      "Rel24": {
+        "classType": "RelationshipType",
+        "key": "Rel24",
+        "type": "INVENTORY_FOR",
+        "startNodeLabelKey": "Node13",
+        "endNodeLabelKey": "Node0",
+        "constraints": [],
+        "properties": {
+          "Prop24": {
+            "key": "Prop24",
+            "name": "setQuantity",
+            "datatype": "Integer",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": false,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          }
+        },
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 0
+        }
+      },
+      "Rel20": {
+        "classType": "RelationshipType",
+        "key": "Rel20",
+        "type": "HAS_THEME",
+        "startNodeLabelKey": "Node0",
+        "endNodeLabelKey": "Node11",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 0
+        }
+      },
+      "Rel22": {
+        "classType": "RelationshipType",
+        "key": "Rel22",
+        "type": "HAS_PARENT_THEME",
+        "startNodeLabelKey": "Node11",
+        "endNodeLabelKey": "Node11",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 40
+        }
+      },
+      "Rel25": {
+        "classType": "RelationshipType",
+        "key": "Rel25",
+        "type": "HAS_COLOR",
+        "startNodeLabelKey": "Node15",
+        "endNodeLabelKey": "Node3",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 0
+        }
+      },
+      "Rel26": {
+        "classType": "RelationshipType",
+        "key": "Rel26",
+        "type": "ASSOCIATED_INVENTORY",
+        "startNodeLabelKey": "Node15",
+        "endNodeLabelKey": "Node13",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 0
+        }
+      },
+      "Rel27": {
+        "classType": "RelationshipType",
+        "key": "Rel27",
+        "type": "FOR_PART",
+        "startNodeLabelKey": "Node15",
+        "endNodeLabelKey": "Node9",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 0
+        }
+      }
+    }
+  }
+}

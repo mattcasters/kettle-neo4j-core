@@ -100,8 +100,19 @@ public class CypherWorkbenchImporter {
         String propertyKey = (String) jNodeProperty.get( "key" );
         String propertyTypeString = (String) jNodeProperty.get( "datatype" );
         Boolean propertyPartOfKey = (Boolean) jNodeProperty.get( "isPartOfKey" );
+        Boolean propertyMustExist = (Boolean) jNodeProperty.get( "mustExist" );
+        Boolean propertyHasUniqueConstraints = (Boolean) jNodeProperty.get( "hasUniqueConstraint" );
+        Boolean propertyIsIndexed = (Boolean) jNodeProperty.get( "isIndexed" );
+
         GraphPropertyType propertyType = GraphPropertyType.parseCode( propertyTypeString );
-        GraphProperty nodeProperty = new GraphProperty( propertyKey, propertyName, propertyType, propertyPartOfKey );
+        GraphProperty nodeProperty = new GraphProperty(
+          propertyKey, propertyName,
+          propertyType,
+          propertyPartOfKey==null ? false : propertyPartOfKey.booleanValue(),
+          propertyMustExist==null ? false : propertyMustExist.booleanValue(),
+          propertyHasUniqueConstraints==null ? false : propertyHasUniqueConstraints.booleanValue(),
+          propertyIsIndexed==null ? false : propertyIsIndexed.booleanValue()
+        );
         properties.add( nodeProperty );
       }
     }
@@ -157,16 +168,14 @@ public class CypherWorkbenchImporter {
         property.setDescription( null );
       }
 
+      // Change the relationships to make source/target match the new names
+      //
       for ( GraphRelationship relationship : graphModel.getRelationships() ) {
         if ( relationship.getNodeSource().equals( oldName ) ) {
           relationship.setNodeSource( label );
         }
         if ( relationship.getNodeTarget().equals( oldName ) ) {
           relationship.setNodeTarget( label );
-        }
-        for ( GraphProperty property : relationship.getProperties() ) {
-          property.setName( property.getDescription() );
-          property.setDescription( null );
         }
       }
     }
@@ -195,6 +204,13 @@ public class CypherWorkbenchImporter {
     for ( GraphRelationship relationship : graphModel.getRelationships() ) {
       relationship.setName( relationship.getLabel() );
       relationship.setDescription( relationship.getNodeSource() + " - " + relationship.getNodeTarget() );
+
+      // Fix the property names as well
+      //
+      for ( GraphProperty property : relationship.getProperties() ) {
+        property.setName( property.getDescription() );
+        property.setDescription( null );
+      }
     }
 
     return graphModel;

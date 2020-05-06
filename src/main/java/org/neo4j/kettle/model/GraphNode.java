@@ -47,7 +47,7 @@ public class GraphNode {
     // Copy properties
     List<GraphProperty> propertiesCopy = new ArrayList<>();
     for ( GraphProperty property : graphNode.getProperties() ) {
-      GraphProperty propertyCopy = new GraphProperty( property.getName(), property.getDescription(), property.getType(), property.isPrimary() );
+      GraphProperty propertyCopy = new GraphProperty( property );
       propertiesCopy.add( propertyCopy );
     }
     setProperties( propertiesCopy );
