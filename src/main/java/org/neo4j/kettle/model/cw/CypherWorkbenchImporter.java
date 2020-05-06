@@ -51,8 +51,8 @@ public class CypherWorkbenchImporter {
           graphNode.getProperties().addAll( importProperties( jNodeLabel, "properties" ) );
 
           JSONObject jNodeDisplay = (JSONObject) jNodeLabel.get( "display" );
-          Long nodeLocationX = (Long) jNodeDisplay.get( "x" );
-          Long nodeLocationY = (Long) jNodeDisplay.get( "y" );
+          Double nodeLocationX = getDouble( jNodeDisplay.get( "x" ) );
+          Double nodeLocationY = getDouble( jNodeDisplay.get( "y" ) );
           if ( nodeLocationX != null && nodeLocationY != null ) {
             graphNode.setPresentation( new GraphPresentation( nodeLocationX.intValue(), nodeLocationY.intValue() ) );
           }
@@ -88,6 +88,22 @@ public class CypherWorkbenchImporter {
     } catch ( Exception e ) {
       throw new KettleException( "Error parsing Cypher Workbench model", e );
     }
+  }
+
+  private static Double getDouble( Object obj ) {
+    if (obj==null) {
+      return new Double(0);
+    }
+    if (obj instanceof Double) {
+      return (Double)obj;
+    }
+    if (obj instanceof Float) {
+      return ((Float)obj).doubleValue();
+    }
+    if (obj instanceof Long) {
+      return ((Long)obj).doubleValue();
+    }
+    throw new RuntimeException("Unrecognized data type for value "+obj.toString());
   }
 
   private static List<GraphProperty> importProperties( JSONObject j, String propertiesKey ) {
