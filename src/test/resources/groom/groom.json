@@ -1,0 +1,895 @@
+{
+  "metadata": {
+    "title": "Groom",
+    "dateCreated": "1585243751657",
+    "dateUpdated": "1588788283205",
+    "description": "The Doom Graph Model",
+    "notes": "See https://github.com/voutilad/groom",
+    "tags": [],
+    "customers": [],
+    "owners": [
+      {
+        "email": "dave.voutila@neotechnology.com",
+        "__typename": "User"
+      }
+    ],
+    "viewSettings": {
+      "canvasViewSettings": {
+        "currentPan": {
+          "x": -198.90000000000174,
+          "y": 82.69999999999997
+        },
+        "currentOffset": {
+          "x": -63.400000000000055,
+          "y": -33.75000000000003
+        },
+        "scaleFactor": 1.1
+      }
+    }
+  },
+  "dataModel": {
+    "nodeLabels": {
+      "Node21": {
+        "classType": "NodeLabel",
+        "label": "Mission",
+        "fromDataSources": [],
+        "key": "Node21",
+        "constraints": [],
+        "indexedProperties": [],
+        "properties": {
+          "Prop5": {
+            "key": "Prop5",
+            "name": "id",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": true,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": true,
+            "hasUniqueConstraint": true
+          }
+        },
+        "referenceData": {},
+        "display": {
+          "color": "#607d8b",
+          "stroke": "#1b3844",
+          "strokeWidth": 4,
+          "x": 1319.375,
+          "y": 352.75,
+          "radius": 40,
+          "size": "md",
+          "width": 80,
+          "height": 80,
+          "fontSize": 14,
+          "fontColor": "white",
+          "textLocation": "middle",
+          "isLocked": false
+        },
+        "hasAnnotation": true
+      },
+      "Node17": {
+        "classType": "NodeLabel",
+        "label": "Frame",
+        "fromDataSources": [],
+        "key": "Node17",
+        "constraints": [],
+        "indexedProperties": [],
+        "properties": {
+          "Prop4": {
+            "key": "Prop4",
+            "name": "millis",
+            "datatype": "Integer",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          },
+          "Prop0": {
+            "key": "Prop0",
+            "name": "tic",
+            "datatype": "Integer",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": true,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": true,
+            "hasUniqueConstraint": true
+          }
+        },
+        "referenceData": {},
+        "display": {
+          "color": "#cddc39",
+          "stroke": "#7a8e00",
+          "strokeWidth": 4,
+          "x": 549.875,
+          "y": 70.125,
+          "radius": 40,
+          "size": "md",
+          "width": 80,
+          "height": 80,
+          "fontSize": 14,
+          "fontColor": "black",
+          "textLocation": "middle",
+          "isLocked": false
+        },
+        "hasAnnotation": true
+      },
+      "Node6": {
+        "classType": "NodeLabel",
+        "label": "Level",
+        "fromDataSources": [],
+        "key": "Node6",
+        "constraints": [],
+        "indexedProperties": [],
+        "properties": {
+          "Prop21": {
+            "key": "Prop21",
+            "name": "id",
+            "datatype": "String",
+            "referenceData": "e1m1",
+            "fromDataSources": [],
+            "isPartOfKey": true,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": true,
+            "hasUniqueConstraint": true
+          }
+        },
+        "referenceData": {},
+        "display": {
+          "color": "#607d8b",
+          "stroke": "#1b3844",
+          "strokeWidth": 4,
+          "x": 1223.125,
+          "y": 632.75,
+          "radius": 40,
+          "size": "md",
+          "width": 80,
+          "height": 80,
+          "fontSize": 14,
+          "fontColor": "white",
+          "textLocation": "middle",
+          "isLocked": false
+        },
+        "hasAnnotation": true
+      },
+      "Node4": {
+        "classType": "NodeLabel",
+        "label": "Actor:Player",
+        "fromDataSources": [],
+        "key": "Node4",
+        "constraints": [],
+        "indexedProperties": [],
+        "properties": {
+          "Prop3": {
+            "key": "Prop3",
+            "name": "id",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": true,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": true,
+            "hasUniqueConstraint": true
+          }
+        },
+        "referenceData": {},
+        "display": {
+          "color": "#2196f3",
+          "stroke": "#004fa2",
+          "strokeWidth": 4,
+          "x": 411.272705078125,
+          "y": 318.9090881347656,
+          "radius": 40,
+          "size": "md",
+          "width": 80,
+          "height": 80,
+          "fontSize": 14,
+          "fontColor": "white",
+          "textLocation": "middle",
+          "isLocked": false
+        },
+        "hasAnnotation": true
+      },
+      "Node5": {
+        "classType": "NodeLabel",
+        "label": "State:PlayerState",
+        "fromDataSources": [],
+        "key": "Node5",
+        "constraints": [],
+        "indexedProperties": [],
+        "properties": {
+          "Prop9": {
+            "key": "Prop9",
+            "name": "position",
+            "datatype": "Point",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": false,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          },
+          "Prop20": {
+            "key": "Prop20",
+            "name": "angle",
+            "datatype": "Integer",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": false,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          },
+          "Prop19": {
+            "key": "Prop19",
+            "name": "armor",
+            "datatype": "Integer",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": false,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          },
+          "Prop18": {
+            "key": "Prop18",
+            "name": "health",
+            "datatype": "Integer",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": false,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          }
+        },
+        "referenceData": {},
+        "display": {
+          "color": "#03a9f4",
+          "stroke": "#0060a3",
+          "strokeWidth": 4,
+          "x": 626.125,
+          "y": 503.875,
+          "radius": 40,
+          "size": "md",
+          "width": 80,
+          "height": 80,
+          "fontSize": 14,
+          "fontColor": "white",
+          "textLocation": "middle",
+          "isLocked": false
+        },
+        "hasAnnotation": true
+      },
+      "Node3": {
+        "classType": "NodeLabel",
+        "label": "State:EnemyState",
+        "fromDataSources": [],
+        "key": "Node3",
+        "constraints": [],
+        "indexedProperties": [],
+        "properties": {
+          "Prop10": {
+            "key": "Prop10",
+            "name": "angle",
+            "datatype": "Integer",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": false,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          },
+          "Prop7": {
+            "key": "Prop7",
+            "name": "position",
+            "datatype": "Point",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": false,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          },
+          "Prop23": {
+            "key": "Prop23",
+            "name": "health",
+            "datatype": "Integer",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": false,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          }
+        },
+        "referenceData": {},
+        "display": {
+          "color": "#f44336",
+          "stroke": "#970000",
+          "strokeWidth": 4,
+          "x": 958.625,
+          "y": 315.125,
+          "radius": 40,
+          "size": "md",
+          "width": 80,
+          "height": 80,
+          "fontSize": 14,
+          "fontColor": "white",
+          "textLocation": "middle",
+          "isLocked": false
+        },
+        "hasAnnotation": true
+      },
+      "Node2": {
+        "classType": "NodeLabel",
+        "label": "Actor:Enemy",
+        "fromDataSources": [],
+        "key": "Node2",
+        "constraints": [],
+        "indexedProperties": [],
+        "properties": {
+          "Prop8": {
+            "key": "Prop8",
+            "name": "angle",
+            "datatype": "Integer",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": false,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          },
+          "Prop25": {
+            "key": "Prop25",
+            "name": "id",
+            "datatype": "String",
+            "referenceData": "4339714640",
+            "fromDataSources": [],
+            "isPartOfKey": true,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": true,
+            "hasUniqueConstraint": true
+          },
+          "Prop24": {
+            "key": "Prop24",
+            "name": "type",
+            "datatype": "String",
+            "referenceData": "Imp",
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          }
+        },
+        "referenceData": {},
+        "display": {
+          "color": "#e91e63",
+          "stroke": "#8e0023",
+          "strokeWidth": 4,
+          "x": 1141.272705078125,
+          "y": 72.54545593261719,
+          "radius": 40,
+          "size": "md",
+          "width": 80,
+          "height": 80,
+          "fontSize": 14,
+          "fontColor": "white",
+          "textLocation": "middle",
+          "isLocked": false
+        },
+        "hasAnnotation": true
+      },
+      "Node1": {
+        "classType": "NodeLabel",
+        "label": "Event",
+        "fromDataSources": [],
+        "key": "Node1",
+        "constraints": [],
+        "indexedProperties": [],
+        "properties": {
+          "Prop6": {
+            "key": "Prop6",
+            "name": "debug",
+            "datatype": "String",
+            "referenceData": null,
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": false,
+            "mustExist": false,
+            "hasUniqueConstraint": false
+          },
+          "Prop1": {
+            "key": "Prop1",
+            "name": "type",
+            "datatype": "String",
+            "referenceData": "move",
+            "fromDataSources": [],
+            "isPartOfKey": false,
+            "isArray": false,
+            "isIndexed": false,
+            "mustExist": true,
+            "hasUniqueConstraint": false
+          }
+        },
+        "referenceData": {},
+        "display": {
+          "color": "#009688",
+          "stroke": "#004d42",
+          "strokeWidth": 4,
+          "x": 708.625,
+          "y": 178.875,
+          "radius": 40,
+          "size": "md",
+          "width": 80,
+          "height": 80,
+          "fontSize": 14,
+          "fontColor": "white",
+          "textLocation": "middle",
+          "isLocked": false
+        },
+        "hasAnnotation": true
+      },
+      "Node0": {
+        "classType": "NodeLabel",
+        "label": "SubSector",
+        "fromDataSources": [],
+        "key": "Node0",
+        "constraints": [],
+        "indexedProperties": [],
+        "properties": {
+          "Prop17": {
+            "key": "Prop17",
+            "name": "id",
+            "datatype": "String",
+            "referenceData": "4339630648",
+            "fromDataSources": [],
+            "isPartOfKey": true,
+            "isArray": false,
+            "isIndexed": true,
+            "mustExist": true,
+            "hasUniqueConstraint": true
+          }
+        },
+        "referenceData": {},
+        "display": {
+          "color": "#795548",
+          "stroke": "#321507",
+          "strokeWidth": 4,
+          "x": 917,
+          "y": 543.25,
+          "radius": 40,
+          "size": "md",
+          "width": 80,
+          "height": 80,
+          "fontSize": 14,
+          "fontColor": "white",
+          "textLocation": "middle",
+          "isLocked": false
+        },
+        "hasAnnotation": true
+      }
+    },
+    "relationshipTypes": {
+      "Rel3": {
+        "classType": "RelationshipType",
+        "key": "Rel3",
+        "type": "TARGET_IN",
+        "startNodeLabelKey": "Node5",
+        "endNodeLabelKey": "Node1",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 25
+        }
+      },
+      "Rel2": {
+        "classType": "RelationshipType",
+        "key": "Rel2",
+        "type": "ACTOR_IN",
+        "startNodeLabelKey": "Node3",
+        "endNodeLabelKey": "Node1",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 25
+        }
+      },
+      "Rel16": {
+        "classType": "RelationshipType",
+        "key": "Rel16",
+        "type": "TARGET_IN",
+        "startNodeLabelKey": "Node3",
+        "endNodeLabelKey": "Node1",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": -25
+        }
+      },
+      "Rel8": {
+        "classType": "RelationshipType",
+        "key": "Rel8",
+        "type": "ACTOR_IN",
+        "startNodeLabelKey": "Node5",
+        "endNodeLabelKey": "Node1",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": -25
+        }
+      },
+      "Rel0": {
+        "classType": "RelationshipType",
+        "key": "Rel0",
+        "type": "PREV_FRAME",
+        "startNodeLabelKey": "Node17",
+        "endNodeLabelKey": "Node17",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 40
+        }
+      },
+      "Rel1": {
+        "classType": "RelationshipType",
+        "key": "Rel1",
+        "type": "OCCURRED_AT",
+        "startNodeLabelKey": "Node1",
+        "endNodeLabelKey": "Node17",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 0
+        }
+      },
+      "Rel26": {
+        "classType": "RelationshipType",
+        "key": "Rel26",
+        "type": "CURRENT_STATE",
+        "startNodeLabelKey": "Node2",
+        "endNodeLabelKey": "Node3",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 25
+        }
+      },
+      "Rel25": {
+        "classType": "RelationshipType",
+        "key": "Rel25",
+        "type": "CURRENT_STATE",
+        "startNodeLabelKey": "Node4",
+        "endNodeLabelKey": "Node5",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": -25
+        }
+      },
+      "Rel23": {
+        "classType": "RelationshipType",
+        "key": "Rel23",
+        "type": "PREV_LEVEL",
+        "startNodeLabelKey": "Node6",
+        "endNodeLabelKey": "Node6",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 40
+        }
+      },
+      "Rel21": {
+        "classType": "RelationshipType",
+        "key": "Rel21",
+        "type": "HAS_LEVEL",
+        "startNodeLabelKey": "Node21",
+        "endNodeLabelKey": "Node6",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 0
+        }
+      },
+      "Rel15": {
+        "classType": "RelationshipType",
+        "key": "Rel15",
+        "type": "INITIAL_STATE",
+        "startNodeLabelKey": "Node2",
+        "endNodeLabelKey": "Node3",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": -25
+        }
+      },
+      "Rel14": {
+        "classType": "RelationshipType",
+        "key": "Rel14",
+        "type": "IN_SUBSECTOR",
+        "startNodeLabelKey": "Node3",
+        "endNodeLabelKey": "Node0",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 0
+        }
+      },
+      "Rel13": {
+        "classType": "RelationshipType",
+        "key": "Rel13",
+        "type": "PREV_STATE",
+        "startNodeLabelKey": "Node3",
+        "endNodeLabelKey": "Node3",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 40
+        }
+      },
+      "Rel12": {
+        "classType": "RelationshipType",
+        "key": "Rel12",
+        "type": "PREV_STATE",
+        "startNodeLabelKey": "Node5",
+        "endNodeLabelKey": "Node5",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 40
+        }
+      },
+      "Rel11": {
+        "classType": "RelationshipType",
+        "key": "Rel11",
+        "type": "IN_SUBSECTOR",
+        "startNodeLabelKey": "Node5",
+        "endNodeLabelKey": "Node0",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 0
+        }
+      },
+      "Rel10": {
+        "classType": "RelationshipType",
+        "key": "Rel10",
+        "type": "INITIAL_STATE",
+        "startNodeLabelKey": "Node4",
+        "endNodeLabelKey": "Node5",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 25
+        }
+      },
+      "Rel9": {
+        "classType": "RelationshipType",
+        "key": "Rel9",
+        "type": "PREV_EVENT",
+        "startNodeLabelKey": "Node1",
+        "endNodeLabelKey": "Node1",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 40
+        }
+      },
+      "Rel7": {
+        "classType": "RelationshipType",
+        "key": "Rel7",
+        "type": "STARTS_AT",
+        "startNodeLabelKey": "Node6",
+        "endNodeLabelKey": "Node0",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 25
+        }
+      },
+      "Rel6": {
+        "classType": "RelationshipType",
+        "key": "Rel6",
+        "type": "CONTAINS",
+        "startNodeLabelKey": "Node6",
+        "endNodeLabelKey": "Node0",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": -25
+        }
+      },
+      "Rel5": {
+        "classType": "RelationshipType",
+        "key": "Rel5",
+        "type": "CONNECTS_TO",
+        "startNodeLabelKey": "Node0",
+        "endNodeLabelKey": "Node0",
+        "constraints": [],
+        "properties": {},
+        "referenceData": {},
+        "outMinCardinality": "0",
+        "outMaxCardinality": "many",
+        "inMinCardinality": "0",
+        "inMaxCardinality": "many",
+        "display": {
+          "color": "black",
+          "fontSize": 14,
+          "strokeWidth": 3,
+          "offset": 40
+        }
+      }
+    }
+  }
+}
