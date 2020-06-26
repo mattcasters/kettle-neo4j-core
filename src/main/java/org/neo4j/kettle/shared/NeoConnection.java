@@ -63,6 +63,9 @@ public class NeoConnection extends Variables {
   private boolean usingEncryption;
 
   @MetaStoreAttribute
+  private String usingEncryptionVariable;
+
+  @MetaStoreAttribute
   private List<String> manualUrls;
 
   @MetaStoreAttribute
@@ -85,6 +88,9 @@ public class NeoConnection extends Variables {
 
   @MetaStoreAttribute
   private boolean version4;
+
+  @MetaStoreAttribute
+  private String version4Variable;
 
   public NeoConnection() {
     boltPort = "7687";
@@ -111,6 +117,7 @@ public class NeoConnection extends Variables {
     this.username = source.username;
     this.password = source.password;
     this.usingEncryption = source.usingEncryption;
+    this.usingEncryptionVariable = source.usingEncryptionVariable;
     this.connectionLivenessCheckTimeout = source.connectionLivenessCheckTimeout;
     this.maxConnectionLifetime = source.maxConnectionLifetime;
     this.maxConnectionPoolSize = source.maxConnectionPoolSize;
@@ -118,6 +125,7 @@ public class NeoConnection extends Variables {
     this.connectionTimeout = source.connectionTimeout;
     this.maxTransactionRetryTime = source.maxTransactionRetryTime;
     this.version4 = source.version4;
+    this.version4Variable = source.version4Variable;
   }
 
   @Override
@@ -287,6 +295,26 @@ public class NeoConnection extends Variables {
     return urls.toString();
   }
 
+  public boolean encryptionVariableSet() {
+    if ( !Utils.isEmpty( usingEncryptionVariable ) ) {
+      String value = environmentSubstitute( usingEncryptionVariable );
+      if ( !Utils.isEmpty( value ) ) {
+        return ValueMetaString.convertStringToBoolean( value );
+      }
+    }
+    return false;
+  }
+
+  public boolean version4VariableSet() {
+    if ( !Utils.isEmpty( version4Variable ) ) {
+      String value = environmentSubstitute( version4Variable );
+      if ( !Utils.isEmpty( value ) ) {
+        return ValueMetaString.convertStringToBoolean( value );
+      }
+    }
+    return false;
+  }
+
   public Driver getDriver( LogChannelInterface log ) {
 
     try {
@@ -295,7 +323,7 @@ public class NeoConnection extends Variables {
       String realUsername = environmentSubstitute( username );
       String realPassword = Encr.decryptPasswordOptionallyEncrypted( environmentSubstitute( password ) );
       Config.ConfigBuilder configBuilder;
-      if ( usingEncryption ) {
+      if ( encryptionVariableSet() || usingEncryption ) {
         configBuilder = Config.builder().withEncryption();
       } else {
         configBuilder = Config.builder().withoutEncryption();
@@ -661,5 +689,37 @@ public class NeoConnection extends Variables {
    */
   public void setVersion4( boolean version4 ) {
     this.version4 = version4;
+  }
+
+  /**
+   * Gets usingEncryptionVariable
+   *
+   * @return value of usingEncryptionVariable
+   */
+  public String getUsingEncryptionVariable() {
+    return usingEncryptionVariable;
+  }
+
+  /**
+   * @param usingEncryptionVariable The usingEncryptionVariable to set
+   */
+  public void setUsingEncryptionVariable( String usingEncryptionVariable ) {
+    this.usingEncryptionVariable = usingEncryptionVariable;
+  }
+
+  /**
+   * Gets version4Variable
+   *
+   * @return value of version4Variable
+   */
+  public String getVersion4Variable() {
+    return version4Variable;
+  }
+
+  /**
+   * @param version4Variable The version4Variable to set
+   */
+  public void setVersion4Variable( String version4Variable ) {
+    this.version4Variable = version4Variable;
   }
 }
