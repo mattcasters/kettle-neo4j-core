@@ -5,5 +5,11 @@ It adds the Graph data type, the Neo4j Connection and Graph Nodel Metastore elem
 
 # Build
 
-mvn clean install
+mvn -s path-to-pentaho-maven-settings.txt clean install
+
+# Pentaho Maven configuration
+
+See here: https://github.com/pentaho/maven-parent-poms/blob/master/maven-support-files/settings.xml
+
+
 
